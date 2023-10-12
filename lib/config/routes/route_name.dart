@@ -1,4 +1,4 @@
 class RouteName {
-  static const homeRouteName = '/';
+  static const authRouteName = '/';
   static const errorRouteName = '/';
 }

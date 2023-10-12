@@ -1,6 +1,6 @@
-import 'package:dhatnoon/routes/config.dart';
-import 'package:dhatnoon/routes/error.dart';
-import 'package:dhatnoon/routes/name.dart';
+import 'package:dhatnoon/config/routes/route_config.dart';
+import 'package:dhatnoon/config/routes/route_name.dart';
+import 'package:dhatnoon/core/Errors/route_error.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       builder: (context) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: RouteName.homeRouteName,
+          initialRoute: RouteName.authRouteName,
           unknownRoute: GetPage(
               name: RouteName.errorRouteName, page: () => const ErrorPage()),
           getPages: AppRoutes.pages,
