@@ -1,16 +1,56 @@
-# dhatnoon
+<!DOCTYPE html>
+<html>
+<head>
+  
+</head>
+<body>
 
-A new Flutter project.
+<h1>Dhatnoon</h1>
 
-## Getting Started
+<h2>Project Structure</h2>
 
-This project is a starting point for a Flutter application.
+<pre>
+lib/
+├── core/
+│   ├── exceptions/
+│   ├── network/
+│   ├── utils/
+│   └── errors/
+├── config/
+│   ├── routes/
+│    
+├── features/
+│   ├── feature_name1/
+│   │   ├── presentation/
+│   │   │   ├── pages/
+│   │   │   ├── widgets/
+│   │   ├── domain/
+│   │   │   ├── usecases/
+│   │   │   ├── repositories/
+│   │   └── data/
+│   │   │   ├── repositories/
+│   │   │   ├── data_sources/
+│   ├── feature_name2/
+│   │   ├── presentation/
+│   │   │   ├── pages/
+│   │   │   ├── widgets/
+│   │   ├── domain/
+│   │   │   ├── usecases/
+│   │   │   ├── repositories/
+│   │   └── data/
+│   │   │   ├── repositories/
+│   │   │   ├── data_sources/
+└── main.dart
+</pre>
 
-A few resources to get you started if this is your first Flutter project:
+<h2>Project Structure Overview</h2>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<ul>
+  <li><strong>Presentation Layer:</strong> User interface and interactions. It includes folders for UI pages and reusable widgets.</li>
+  <li><strong>Domain Layer:</strong> Core business logic, use cases, and repositories. The "repositories" folder is used for managing data access.</li>
+  <li><strong>Data Layer:</strong> Data sources, repositories, and data models. Repositories handle data access, and data sources connect to external services or databases.</li>
+  <li><strong>Core:</strong> Shared code across the project, including custom exceptions, network utilities, error handling, and utility functions.</li>
+</ul>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+</body>
+</html>
