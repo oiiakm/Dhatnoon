@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       builder: (context) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: RouteName.authRouteName,
+          initialRoute: RouteName.initialHomeRouteName,
           unknownRoute: GetPage(
               name: RouteName.errorRouteName, page: () => const ErrorPage()),
           getPages: AppRoutes.pages,
