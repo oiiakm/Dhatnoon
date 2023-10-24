@@ -1,6 +1,9 @@
+import 'package:dhatnoon/features/home/presentation/widgets/alert_dialogue.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class UserInformationWidget extends StatelessWidget {
+  final BuildContext context;
   final String userName;
   final String imageUrl;
   final String actionText;
@@ -10,6 +13,7 @@ class UserInformationWidget extends StatelessWidget {
     required this.userName,
     required this.imageUrl,
     required this.actionText,
+    required this.context,
   }) : super(key: key);
 
   @override
@@ -47,17 +51,15 @@ class UserInformationWidget extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          _buildButton(actionText),
+          _buildButton(actionText, true),
           const SizedBox(width: 10),
-          _buildButton(
-            'Activity Log',
-          ),
+          _buildButton('Activity Log', false),
         ],
       ),
     );
   }
 
-  Widget _buildButton(String text) {
+  Widget _buildButton(String text, bool action) {
     Color buttonColor = Colors.black;
     if (text.startsWith("Send")) {
       buttonColor = const Color(0xFF232D36);
@@ -74,7 +76,28 @@ class UserInformationWidget extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            if (action == true) {
+              return CustomAlertDialog(
+                imageUrl: imageUrl,
+                name: userName,
+                phoneNumber: '123-456-7890',
+                actionText: actionText,
+                buttonColor: buttonColor,
+              );
+            } else {
+              Future.delayed(Duration.zero, () {
+                Get.offNamed('');
+              });
+
+              return Container();
+            }
+          },
+        );
+      },
       child: Container(
         width: 190,
         height: 50,
