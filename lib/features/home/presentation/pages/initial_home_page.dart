@@ -1,4 +1,4 @@
-import 'package:dhatnoon/features/home/presentation/widgets/header_widget.dart';
+import 'package:dhatnoon/common/header_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

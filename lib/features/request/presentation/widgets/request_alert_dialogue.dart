@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class CustomAlertDialog extends StatelessWidget {
+class RequestAlertDialogue extends StatelessWidget {
   final String imageUrl;
   final String name;
-  final String phoneNumber;
-  final String actionText;
-  final Color buttonColor;
+  final TimeOfDay startTime;
+  final TimeOfDay endTime;
+  final String requestType;
 
-  const CustomAlertDialog({
+  const RequestAlertDialogue({
     Key? key,
     required this.imageUrl,
     required this.name,
-    required this.phoneNumber,
-    required this.actionText,
-    required this.buttonColor,
+    required this.requestType,
+    required this.startTime,
+    required this.endTime,
   }) : super(key: key);
 
   @override
@@ -35,7 +35,15 @@ class CustomAlertDialog extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Phone Number: $phoneNumber',
+            'Request Type: $requestType',
+            style: const TextStyle(fontSize: 16, color: Colors.white),
+          ),
+          Text(
+            'Start Time: $startTime',
+            style: const TextStyle(fontSize: 16, color: Colors.white),
+          ),
+          Text(
+            'End Time: $endTime',
             style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
           const SizedBox(height: 16),
@@ -45,7 +53,7 @@ class CustomAlertDialog extends StatelessWidget {
               width: 190,
               height: 50,
               decoration: BoxDecoration(
-                color: buttonColor,
+                color: Colors.brown,
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: const [
                   BoxShadow(
@@ -55,10 +63,10 @@ class CustomAlertDialog extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
-                  actionText,
-                  style: const TextStyle(
+                  "Send Request",
+                  style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w400,

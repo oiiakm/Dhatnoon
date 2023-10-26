@@ -1,4 +1,3 @@
-import 'package:dhatnoon/features/home/presentation/widgets/alert_dialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,16 +24,9 @@ class UserInformationWidget extends StatelessWidget {
         children: [
           Column(
             children: [
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: NetworkImage(imageUrl),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+              CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(imageUrl),
               ),
               const SizedBox(
                 width: 10,
@@ -51,15 +43,15 @@ class UserInformationWidget extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          _buildButton(actionText, true),
+          _buildButton(actionText),
           const SizedBox(width: 10),
-          _buildButton('Activity Log', false),
+          _buildButton('Activity Log'),
         ],
       ),
     );
   }
 
-  Widget _buildButton(String text, bool action) {
+  Widget _buildButton(String text) {
     Color buttonColor = Colors.black;
     if (text.startsWith("Send")) {
       buttonColor = const Color(0xFF232D36);
@@ -77,26 +69,19 @@ class UserInformationWidget extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            if (action == true) {
-              return CustomAlertDialog(
-                imageUrl: imageUrl,
-                name: userName,
-                phoneNumber: '123-456-7890',
-                actionText: actionText,
-                buttonColor: buttonColor,
-              );
-            } else {
-              Future.delayed(Duration.zero, () {
-                Get.offNamed('');
-              });
-
-              return Container();
-            }
-          },
-        );
+        if (text.startsWith('Send Request')) {
+          Get.toNamed(
+            '/requestWheel',
+            arguments: {
+              'userName': userName,
+              'imageUrl': imageUrl,
+            },
+          );
+        } else if (text.startsWith('Activity')) {
+          Get.toNamed(
+            '/history',
+          );
+        }
       },
       child: Container(
         width: 190,
