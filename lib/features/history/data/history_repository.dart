@@ -19,14 +19,14 @@ class HistoryRepository {
   List<Map<String, dynamic>> getDummyHistoryMessages() {
     return [
       {
-        'text': 'Hi there!',
+        'text': 'Elon approved',
         'isUserMessage': true,
-        'timestamp': '1:30 PM, 30/09/2023',
+        'timestamp': '1:34 PM, 30/09/2023',
         'userAvatarUrl':
             'https://upload.wikimedia.org/wikipedia/commons/9/99/Elon_Musk_Colorado_2022_%28cropped2%29.jpg',
       },
       {
-        'text': 'Hello!',
+        'text': 'You send a request of front pic to Elon for 1.22PM - 1.55 PM',
         'isUserMessage': false,
         'timestamp': '1:32 PM, 30/09/2023',
         'userAvatarUrl':

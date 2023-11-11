@@ -1,3 +1,5 @@
+import 'package:dhatnoon/features/request/data/request_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RequestAlertDialogue extends StatelessWidget {
@@ -6,6 +8,7 @@ class RequestAlertDialogue extends StatelessWidget {
   final TimeOfDay startTime;
   final TimeOfDay endTime;
   final String requestType;
+  final String user2;
 
   const RequestAlertDialogue({
     Key? key,
@@ -14,10 +17,16 @@ class RequestAlertDialogue extends StatelessWidget {
     required this.requestType,
     required this.startTime,
     required this.endTime,
+    required this.user2,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final FirestoreRequest firestoreRequest = FirestoreRequest();
+
+    String formattedStartTime = '${startTime.hour}:${startTime.minute}';
+    String formattedEndTime = '${endTime.hour}:${endTime.minute}';
+
     return AlertDialog(
       backgroundColor: const Color(0xFF232D36),
       content: Column(
@@ -39,16 +48,26 @@ class RequestAlertDialogue extends StatelessWidget {
             style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
           Text(
-            'Start Time: $startTime',
+            'Start Time: $formattedStartTime',
             style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
           Text(
-            'End Time: $endTime',
+            'End Time: $formattedEndTime',
             style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
           const SizedBox(height: 16),
           InkWell(
-            onTap: () {},
+            onTap: () async {
+              String? uid = FirebaseAuth.instance.currentUser?.uid;
+
+              firestoreRequest.insertData(
+                startTime: formattedStartTime,
+                endTime: formattedEndTime,
+                action: requestType,
+                user1: uid,
+                user2: user2,
+              );
+            },
             child: Container(
               width: 190,
               height: 50,

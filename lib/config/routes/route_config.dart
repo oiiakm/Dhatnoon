@@ -16,5 +16,6 @@ class AppRoutes {
     GetPage(
         name: RouteName.requestWheelRouteName, page: () => RequestWheelPage()),
     GetPage(name: RouteName.historyRouteName, page: () => HistoryPage()),
+     GetPage(name: RouteName.authRouteName, page: () => AuthenticationPage()),
   ];
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "574512346344",
+    "project_id": "dhatnoon-b2bf5",
+    "storage_bucket": "dhatnoon-b2bf5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574512346344:android:3ff253e164ce9887d7c55d",
+        "android_client_info": {
+          "package_name": "com.example.dhatnoon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ33NLgJD6gBEiDcMFGNm0I0nA6d9F2cc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

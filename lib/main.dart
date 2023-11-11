@@ -1,10 +1,17 @@
 import 'package:dhatnoon/config/routes/route_config.dart';
 import 'package:dhatnoon/config/routes/route_name.dart';
 import 'package:dhatnoon/core/Errors/route_error.dart';
+import 'package:dhatnoon/firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -15,9 +22,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
+        ScreenUtil.init(
+          context,
+          designSize: const Size(428, 926),
+        );
+
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: RouteName.homeRouteName,
+          initialRoute: RouteName.authRouteName,
           unknownRoute: GetPage(
               name: RouteName.errorRouteName, page: () => const ErrorPage()),
           getPages: AppRoutes.pages,

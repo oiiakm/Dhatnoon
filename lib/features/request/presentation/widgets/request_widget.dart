@@ -26,6 +26,7 @@ class _RequestWidgetState extends State<RequestWidget> {
     final arguments = Get.arguments as Map<String, dynamic>;
     final userName = arguments['userName'];
     final imageUrl = arguments['imageUrl'];
+    final user2 = arguments['user2'];
     return GestureDetector(
       onTap: () {
         if (widget.controller.startTime.value != null &&
@@ -39,6 +40,7 @@ class _RequestWidgetState extends State<RequestWidget> {
               imageUrl,
               userName,
               widget.name,
+              user2,
               widget.controller.startTime.value!,
               widget.controller.endTime.value!);
         } else {
@@ -130,8 +132,14 @@ class _RequestWidgetState extends State<RequestWidget> {
     }
   }
 
-  showRequestDialog(BuildContext context, String imageUrl, String userName,
-      String requestType, TimeOfDay startTime, TimeOfDay endTime) {
+  showRequestDialog(
+      BuildContext context,
+      String imageUrl,
+      String userName,
+      String requestType,
+      String user2,
+      TimeOfDay startTime,
+      TimeOfDay endTime) {
     showDialog(
       context: context,
       builder: (context) {
@@ -139,6 +147,7 @@ class _RequestWidgetState extends State<RequestWidget> {
           imageUrl: imageUrl,
           name: userName,
           requestType: requestType,
+          user2: user2,
           startTime: startTime,
           endTime: endTime,
         );

@@ -6,6 +6,7 @@ class UserInformationWidget extends StatelessWidget {
   final String userName;
   final String imageUrl;
   final String actionText;
+  final String user2;
 
   const UserInformationWidget({
     Key? key,
@@ -13,6 +14,7 @@ class UserInformationWidget extends StatelessWidget {
     required this.imageUrl,
     required this.actionText,
     required this.context,
+    required this.user2,
   }) : super(key: key);
 
   @override
@@ -75,6 +77,7 @@ class UserInformationWidget extends StatelessWidget {
             arguments: {
               'userName': userName,
               'imageUrl': imageUrl,
+              'user2': user2,
             },
           );
         } else if (text.startsWith('Activity')) {
