@@ -11,12 +11,14 @@ class HistoryMessage {
     required this.userAvatarUrl,
   });
 
-  factory HistoryMessage.fromMap(Map<String, dynamic> map) {
+  factory HistoryMessage.fromMap(Map<String, dynamic> map, String user1,
+      String user1ImageUrl, String user2ImageUrl) {
     return HistoryMessage(
-      text: map['text'],
-      isUserMessage: map['isUserMessage'],
-      timestamp: map['timestamp'],
-      userAvatarUrl: map['userAvatarUrl'],
+      text: map['text'] ?? '',
+      isUserMessage: (map['text'] ?? '').startsWith(user1),
+      timestamp: map['current_time'] ?? '',
+      userAvatarUrl:
+          (map['text'] ?? '').startsWith(user1) ? user1ImageUrl : user2ImageUrl,
     );
   }
 }

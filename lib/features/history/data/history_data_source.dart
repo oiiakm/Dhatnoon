@@ -1,21 +1,20 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
+// history_data_source.dart
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HistoryDataSource {
-  // This data source is not used in this dummy data setup
-  // Replace with actual Firestore setup
+  final FirebaseFirestore firestore;
 
-  // final FirebaseFirestore firestore;
+  HistoryDataSource({required this.firestore});
 
-  // HistoryDataSource(this.firestore);
+  Future<List<Map<String, dynamic>>?> getHistoryMessagesFromFirestore() async {
+    final querySnapshot = await firestore.collection('activity_log').get();
 
-  // Future<List<Map<String, dynamic>>?> getHistoryMessagesFromFirestore() async {
-  // Replace this with actual Firestore data retrieval
-  // final querySnapshot = await firestore.collection('historyMessages').get();
+    if (querySnapshot.docs.isNotEmpty) {
+      return querySnapshot.docs
+          .map((doc) => doc.data())
+          .toList();
+    }
 
-  // if (querySnapshot.docs.isNotEmpty) {
-  //   return querySnapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
-  // }
-
-  // return null;
-  // }
+    return null;
+  }
 }

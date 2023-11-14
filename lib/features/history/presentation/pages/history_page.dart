@@ -30,6 +30,7 @@ class HistoryPage extends StatelessWidget {
       ),
       body: Obx(() {
         final historyMessages = historyController.historyMessages;
+        
 
         if (historyMessages.isEmpty) {
           return const Center(child: Text('No request history available.'));

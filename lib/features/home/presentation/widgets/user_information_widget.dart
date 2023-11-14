@@ -1,3 +1,6 @@
+import 'package:dhatnoon/features/history/domain/history_controllers.dart';
+import 'package:dhatnoon/features/home/data/all_user_data.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +11,7 @@ class UserInformationWidget extends StatelessWidget {
   final String actionText;
   final String user2;
 
-  const UserInformationWidget({
+  UserInformationWidget({
     Key? key,
     required this.userName,
     required this.imageUrl,
@@ -16,6 +19,9 @@ class UserInformationWidget extends StatelessWidget {
     required this.context,
     required this.user2,
   }) : super(key: key);
+
+  final HistoryController historyController = Get.put(HistoryController());
+  final AllUserData _allUserData = AllUserData();
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +76,7 @@ class UserInformationWidget extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (text.startsWith('Send Request')) {
           Get.toNamed(
             '/requestWheel',
@@ -81,6 +87,12 @@ class UserInformationWidget extends StatelessWidget {
             },
           );
         } else if (text.startsWith('Activity')) {
+          String? user1 = FirebaseAuth.instance.currentUser?.uid;
+       String? image1 = await _allUserData.getImageUrlForCurrentUser(user1!);
+          await historyController.fetchHistoryMessages(user1, user2,image1!,imageUrl);
+
+          print(user1);
+          print(user2);
           Get.toNamed(
             '/history',
           );

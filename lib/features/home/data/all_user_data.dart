@@ -36,7 +36,6 @@ class AllUserData {
             'imageUrl': user['profile_picture'] ?? '',
             'user2': user['user_id'] ?? '',
             'actionText': 'Send Request',
-            
           };
 
           userDataList.add(userData);
@@ -47,5 +46,14 @@ class AllUserData {
     } else {
       return [];
     }
+  }
+
+  Future<String?> getImageUrlForCurrentUser(String user1) async {
+    final userDoc = await _firestore.collection('users').doc(user1).get();
+
+    if (userDoc.exists) {
+      return userDoc.data()?['profile_picture'];
+    }
+    return null;
   }
 }

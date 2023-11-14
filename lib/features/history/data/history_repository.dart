@@ -6,32 +6,35 @@ class HistoryRepository {
 
   HistoryRepository(this.historyDataSource);
 
-  Future<List<HistoryMessage>> getHistoryMessages() async {
-    // Replace this with actual data retrieval
-    // final historyMessagesData = await historyDataSource.getHistoryMessagesFromFirestore();
-    final historyMessagesData = getDummyHistoryMessages();
+  Future<List<HistoryMessage>> getHistoryMessages(
+      String user1, String user2 ,String user1ImageUrl,String user2ImageUrl) async {
+    print('Fetching history messages for $user1 and $user2');
 
-    return historyMessagesData
-        .map((data) => HistoryMessage.fromMap(data))
-        .toList();
-  }
+    final logsQuerySnapshot = await historyDataSource.firestore
+        .collection('activity_log')
+        .doc('$user1$user2')
+        .collection('logs')
+        .get();
 
-  List<Map<String, dynamic>> getDummyHistoryMessages() {
-    return [
-      {
-        'text': 'Elon approved',
-        'isUserMessage': true,
-        'timestamp': '1:34 PM, 30/09/2023',
-        'userAvatarUrl':
-            'https://upload.wikimedia.org/wikipedia/commons/9/99/Elon_Musk_Colorado_2022_%28cropped2%29.jpg',
-      },
-      {
-        'text': 'You send a request of front pic to Elon for 1.22PM - 1.55 PM',
-        'isUserMessage': false,
-        'timestamp': '1:32 PM, 30/09/2023',
-        'userAvatarUrl':
-            'https://upload.wikimedia.org/wikipedia/commons/6/6c/Priyanka-chopra-gesf-2018-7565.jpg'
-      },
-    ];
+    if (logsQuerySnapshot.docs.isNotEmpty) {
+      print('Received ${logsQuerySnapshot.docs.length} history messages');
+
+      final historyMessages = logsQuerySnapshot.docs
+          .map((doc) => HistoryMessage.fromMap(doc.data(), user1,user1ImageUrl, user2ImageUrl))
+          .toList();
+
+      // Print the messages for verification
+      historyMessages.forEach((message) {
+        print(
+            'Message: ${message.text}, isUserMessage: ${message.isUserMessage} time: ${message.timestamp}');
+      });
+
+      return historyMessages;
+    }
+
+    print('No history messages found');
+    print('$user1$user2');
+    return [];
   }
+  
 }
