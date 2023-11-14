@@ -13,8 +13,12 @@ class HistoryMessage {
 
   factory HistoryMessage.fromMap(Map<String, dynamic> map, String user1,
       String user1ImageUrl, String user2ImageUrl) {
+    String trimmedText = (map['text'] ?? '').startsWith(user1)
+        ? (map['text'] ?? '').replaceFirst(user1, '').trim()
+        : (map['text'] ?? '').trim();
+
     return HistoryMessage(
-      text: map['text'] ?? '',
+      text: trimmedText,
       isUserMessage: (map['text'] ?? '').startsWith(user1),
       timestamp: map['current_time'] ?? '',
       userAvatarUrl:
