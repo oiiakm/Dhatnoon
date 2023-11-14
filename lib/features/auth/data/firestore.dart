@@ -12,9 +12,12 @@ class FirestoreService {
             await FirebaseFirestore.instance.collection('users').doc(uid).get();
         if (!userDoc.exists) {
           await FirebaseFirestore.instance.collection('users').doc(uid).set({
+            'name': 'test',
             'phoneNumber': mobile,
-            'created_at':DateTime.now(),
-            'user_id':user,
+            'created_at': DateTime.now(),
+            'user_id': uid,
+            'profile_picture':
+                'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072821_1280.jpg',
           });
           Get.offNamed('/home');
           print('User added to Firestore.');
