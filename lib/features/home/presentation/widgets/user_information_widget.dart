@@ -88,8 +88,9 @@ class UserInformationWidget extends StatelessWidget {
           );
         } else if (text.startsWith('Activity')) {
           String? user1 = FirebaseAuth.instance.currentUser?.uid;
-       String? image1 = await _allUserData.getImageUrlForCurrentUser(user1!);
-          await historyController.fetchHistoryMessages(user1, user2,image1!,imageUrl);
+          String? image1 = await _allUserData.getImageUrlForCurrentUser(user1!);
+          await historyController.fetchHistoryMessages(
+              user1, user2, image1!, imageUrl);
 
           print(user1);
           print(user2);

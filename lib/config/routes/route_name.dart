@@ -5,4 +5,6 @@ class RouteName {
   static const homeRouteName = '/home';
   static const requestWheelRouteName = '/requestWheel';
   static const historyRouteName = '/history';
+  static const frontCameraLiveStreamRouteName = '/front_camera_live_stream';
+   static const backCameraLiveStreamRouteName = '/back_camera_live_stream';
 }

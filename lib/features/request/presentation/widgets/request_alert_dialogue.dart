@@ -1,6 +1,9 @@
+import 'package:dhatnoon/core/services/notification_controller.dart';
+import 'package:dhatnoon/core/services/notification_service.dart';
 import 'package:dhatnoon/features/request/data/request_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RequestAlertDialogue extends StatelessWidget {
   final String imageUrl;
@@ -23,6 +26,9 @@ class RequestAlertDialogue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FirestoreRequest firestoreRequest = FirestoreRequest();
+    final NotificationService notificationService = NotificationService();
+    final NotificationController notificationController =
+        Get.put(NotificationController());
 
     String formattedStartTime = '${startTime.hour}:${startTime.minute}';
     String formattedEndTime = '${endTime.hour}:${endTime.minute}';
@@ -58,8 +64,10 @@ class RequestAlertDialogue extends StatelessWidget {
           const SizedBox(height: 16),
           InkWell(
             onTap: () async {
+              notificationService.requestNotificationPermissions();
               String? uid = FirebaseAuth.instance.currentUser?.uid;
-
+              String? token = await notificationService.getToken();
+              await notificationService.saveToken(token!);
               firestoreRequest.insertData(
                 startTime: formattedStartTime,
                 endTime: formattedEndTime,
@@ -67,6 +75,11 @@ class RequestAlertDialogue extends StatelessWidget {
                 user1: uid,
                 user2: user2,
               );
+              String? user2Token = await notificationService.fetchToken(user2);
+              String title = 'Title';
+              String body = 'This the body of the notification';
+              await notificationController.sendPushNotification(
+                  user2Token, title, body);
             },
             child: Container(
               width: 190,
