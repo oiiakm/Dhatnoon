@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                             imageUrl: user['imageUrl'] ?? '',
                             actionText: user['actionText'] ?? '',
                             user2: user['user2'] ?? '',
-                            context: context,
+                            context: context, requestText: user['requestText'] ?? '',
                           ),
                           const SizedBox(height: 3),
                         ],

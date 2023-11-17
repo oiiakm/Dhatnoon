@@ -10,6 +10,7 @@ class UserInformationWidget extends StatelessWidget {
   final String imageUrl;
   final String actionText;
   final String user2;
+  final String requestText;
 
   UserInformationWidget({
     Key? key,
@@ -18,6 +19,7 @@ class UserInformationWidget extends StatelessWidget {
     required this.actionText,
     required this.context,
     required this.user2,
+    required this.requestText,
   }) : super(key: key);
 
   final HistoryController historyController = Get.put(HistoryController());
@@ -53,7 +55,8 @@ class UserInformationWidget extends StatelessWidget {
           const Spacer(),
           _buildButton(actionText),
           const SizedBox(width: 10),
-          _buildButton('Activity Log'),
+          _buildButton(requestText),
+          
         ],
       ),
     );
@@ -68,7 +71,7 @@ class UserInformationWidget extends StatelessWidget {
     } else if (text.startsWith("Requested")) {
       buttonColor = const Color(0xE08A7C00);
     } else if (text.startsWith("Declined")) {
-      buttonColor = const Color(0xFF4B0000);
+      buttonColor = Color.fromARGB(255, 209, 25, 25);
     } else if (text.startsWith("Still")) {
       buttonColor = const Color(0xE04B4B4B);
     } else if (text.startsWith("Approved")) {

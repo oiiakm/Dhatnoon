@@ -22,6 +22,8 @@ class FirestoreRequest {
         'created_at': DateTime.now(),
         'user1': user1,
         'user2': user2,
+        'acceptStatus': false,
+        'requestStatus': true,
       };
       await _activityLogCollection.doc('$user1+$user2').set(dataToInsert);
 
