@@ -2,6 +2,83 @@ import 'package:agora_uikit/agora_uikit.dart';
 import 'package:dhatnoon/features/agora/agora_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:workmanager/workmanager.dart';
+
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) {
+    try {
+      checkAndStartOrEndLiveStream(task);
+    } catch (e, stackTrace) {
+      print('Error executing task: $e\n$stackTrace');
+    }
+    return Future.value(true);
+  });
+}
+
+void checkAndStartOrEndLiveStream(String task) {
+  DateTime currentTime = DateTime.now();
+
+  // Set your desired start and end times here
+  int startHour = 13;
+  int startMinute = 5;
+  int endHour = 13;
+  int endMinute = 7;
+
+  DateTime startTime = DateTime(
+    currentTime.year,
+    currentTime.month,
+    currentTime.day,
+    startHour,
+    startMinute,
+  );
+
+  DateTime endTime = DateTime(
+    currentTime.year,
+    currentTime.month,
+    currentTime.day,
+    endHour,
+    endMinute,
+  );
+
+  if (currentTime.isAfter(startTime) && currentTime.isBefore(endTime)) {
+    if (task == 'startTask') {
+      _startLiveStream();
+    } else if (task == 'endTask') {
+      _endLiveStream();
+    }
+  }
+}
+
+void _startLiveStream() {
+  Get.to(() => const FrontSendStream());
+}
+
+void _endLiveStream() {
+  // Add logic to end the live stream, e.g., navigate back or perform cleanup.
+}
+
+void startAndEndTasks(
+    int startHour, int startMinute, int endHour, int endMinute) {
+  Workmanager().registerPeriodicTask(
+    "startTask",
+    "startTask",
+    initialDelay: Duration(
+      hours: startHour - DateTime.now().hour,
+      minutes: startMinute - DateTime.now().minute,
+    ),
+    frequency: Duration(milliseconds: 1), // Run once a day
+  );
+
+  Workmanager().registerPeriodicTask(
+    "endTask",
+    "endTask",
+    initialDelay: Duration(
+      hours: endHour - DateTime.now().hour,
+      minutes: endMinute - DateTime.now().minute,
+    ),
+    frequency: Duration(milliseconds: 1), // Run once a day
+  );
+}
 
 class FrontSendStream extends StatelessWidget {
   const FrontSendStream({super.key});

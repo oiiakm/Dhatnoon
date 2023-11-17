@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
           
           ElevatedButton(
               onPressed: () {
-                Get.toNamed('/back_camera_live_stream');
+                Get.toNamed('/front_camera_live_stream');
               },
               child: const Text("AGORA")),
 
