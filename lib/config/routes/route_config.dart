@@ -5,8 +5,7 @@ import 'package:dhatnoon/features/history/presentation/pages/history_page.dart';
 import 'package:dhatnoon/features/home/presentation/pages/home_page.dart';
 import 'package:dhatnoon/features/home/presentation/pages/initial_home_page.dart';
 import 'package:dhatnoon/features/request/presentation/pages/request_wheel_page.dart';
-import 'package:dhatnoon/features/agora/back_camera_live_stream.dart';
-import 'package:dhatnoon/features/agora/front_camera_live_stream.dart';
+import 'package:dhatnoon/features/zegocloud/home_page.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
@@ -23,9 +22,6 @@ class AppRoutes {
     GetPage(name: RouteName.historyRouteName, page: () => const HistoryPage()),
     GetPage(
         name: RouteName.frontCameraLiveStreamRouteName,
-        page: () => FrontCameraLiveStreaming()),
-    GetPage(
-        name: RouteName.backCameraLiveStreamRouteName,
-        page: () => BackCameraLiveStream()),
+        page: () => LiveHomePage()),
   ];
 }

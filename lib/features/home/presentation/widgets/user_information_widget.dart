@@ -1,5 +1,6 @@
 import 'package:dhatnoon/features/history/domain/history_controllers.dart';
 import 'package:dhatnoon/features/home/data/all_user_data.dart';
+import 'package:dhatnoon/features/zegocloud/live_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -56,7 +57,6 @@ class UserInformationWidget extends StatelessWidget {
           _buildButton(actionText),
           const SizedBox(width: 10),
           _buildButton(requestText),
-          
         ],
       ),
     );
@@ -100,6 +100,26 @@ class UserInformationWidget extends StatelessWidget {
           Get.toNamed(
             '/history',
           );
+        } else if (text.startsWith('Fetch')) {
+
+      
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) =>
+          //         LivePage(liveID: 'user1user2', isHost: true),
+          //   ),
+          // );
+
+
+
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) =>
+          //         LivePage(liveID: 'user1user2', isHost: false),
+          //   ),
+          // );
         }
       },
       child: Container(

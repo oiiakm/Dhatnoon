@@ -1,17 +1,15 @@
 import 'package:dhatnoon/config/routes/route_config.dart';
 import 'package:dhatnoon/config/routes/route_name.dart';
 import 'package:dhatnoon/core/Errors/route_error.dart';
-import 'package:dhatnoon/features/agora/front_camera_live_stream.dart';
 import 'package:dhatnoon/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:workmanager/workmanager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Workmanager().initialize(callbackDispatcher);
+  // Workmanager().initialize(callbackDispatcher);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
