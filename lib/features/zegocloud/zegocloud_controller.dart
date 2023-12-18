@@ -8,24 +8,17 @@ import 'package:get/get.dart';
 class ZegocloudController extends GetxController {
   late StreamSubscription<DocumentSnapshot<Map<String, dynamic>>> _subscription;
 
-  @override
-  void onInit() {
-    getDocumentData();
-    super.onInit();
-  }
-
-  Future<Map<String, dynamic>> getDocumentData() async {
+  Future<Map<String, dynamic>> getDocumentData(
+      String user1, String user2) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user = auth.currentUser;
-
+    print("$user1$user2");
     if (user != null) {
       try {
         DocumentSnapshot<Map<String, dynamic>> snapshot =
-            await FirebaseFirestore
-                .instance
+            await FirebaseFirestore.instance
                 .collection('activity_log')
-                .doc(
-                    'HlrHpgwWErbWyNM8TFOKvKVBMtl2+VS5RVk0JVhS1T0GvpYHok5jnkmn2')
+                .doc('$user1$user2')
                 .get();
 
         if (snapshot.exists) {
@@ -49,11 +42,17 @@ class ZegocloudController extends GetxController {
   }
 
   void startLive(String liveID,
-      {required bool isHost, required int durationInSeconds,required String user2}) {
+      {required bool isHost,
+      required int durationInSeconds,
+      required String user2}) {
     Navigator.push(
       Get.context!,
       MaterialPageRoute(
-        builder: (context) => LivePage(liveID: liveID, isHost: isHost,userId: user2,),
+        builder: (context) => LivePage(
+          liveID: liveID,
+          isHost: isHost,
+          userId: user2,
+        ),
       ),
     );
 
@@ -63,11 +62,17 @@ class ZegocloudController extends GetxController {
   }
 
   void watchLive(String liveID,
-      {required bool isHost, required int durationInSeconds,required String user1}) {
+      {required bool isHost,
+      required int durationInSeconds,
+      required String user1}) {
     Navigator.push(
       Get.context!,
       MaterialPageRoute(
-        builder: (context) => LivePage(liveID: liveID, isHost: isHost, userId: user1,),
+        builder: (context) => LivePage(
+          liveID: liveID,
+          isHost: isHost,
+          userId: user1,
+        ),
       ),
     );
 

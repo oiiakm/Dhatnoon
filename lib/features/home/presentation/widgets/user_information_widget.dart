@@ -77,7 +77,7 @@ class UserInformationWidget extends StatelessWidget {
     } else if (text.startsWith("Requested")) {
       buttonColor = const Color(0xE08A7C00);
     } else if (text.startsWith("Declined")) {
-      buttonColor = Color.fromARGB(255, 209, 25, 25);
+      buttonColor = const Color.fromARGB(255, 209, 25, 25);
     } else if (text.startsWith("Still")) {
       buttonColor = const Color(0xE04B4B4B);
     } else if (text.startsWith("Approved")) {
@@ -107,16 +107,17 @@ class UserInformationWidget extends StatelessWidget {
             '/history',
           );
         } else if (text.startsWith('Fetch')) {
+          String? user1 = FirebaseAuth.instance.currentUser?.uid;
           Map<String, dynamic> userData =
-              await _zegocloudController.getDocumentData();
+              await _zegocloudController.getDocumentData(user1!, user2);
 
           if (userData['startLive']) {
-            _zegocloudController.watchLive( userData['liveId'],
+            _zegocloudController.watchLive(userData['liveId'],
                 isHost: true, durationInSeconds: 11, user1: userData['user1']);
           }
 
-          String? recipientToken =
-              await _frontCameraLiveStreamController.fetchToken(userData['user2']);
+          String? recipientToken = await _frontCameraLiveStreamController
+              .fetchToken(userData['user2']);
 
           print(recipientToken);
           _frontCameraLiveStreamController.sendNotification(
