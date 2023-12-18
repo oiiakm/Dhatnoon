@@ -2,29 +2,16 @@ import 'package:dhatnoon/common/header_widget.dart';
 import 'package:dhatnoon/features/home/data/all_user_data.dart';
 import 'package:dhatnoon/features/home/presentation/widgets/user_information_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-
   final AllUserData _allUserData = AllUserData();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
           const HeaderWidget(),
-
-
-          
-          ElevatedButton(
-              onPressed: () {
-                Get.toNamed('/front_camera_live_stream');
-              },
-              child: const Text("AGORA")),
-
-
           Expanded(
             child: FutureBuilder(
               future: _allUserData.getAllUsersExceptLoggedIn(),
@@ -47,7 +34,8 @@ class HomePage extends StatelessWidget {
                             imageUrl: user['imageUrl'] ?? '',
                             actionText: user['actionText'] ?? '',
                             user2: user['user2'] ?? '',
-                            context: context, requestText: user['requestText'] ?? '',
+                            context: context,
+                            requestText: user['requestText'] ?? '',
                           ),
                           const SizedBox(height: 3),
                         ],

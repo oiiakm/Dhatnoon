@@ -26,6 +26,7 @@ dependencies:
   geolocator: ^10.1.0
   geocoding: ^2.1.1
   zego_uikit_prebuilt_live_streaming: ^2.22.4
+  flutter_local_notifications: ^16.2.0
 
 dev_dependencies:
   flutter_test:

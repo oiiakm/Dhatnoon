@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 
@@ -37,11 +36,15 @@ class CutomAudienceConfig extends ZegoUIKitPrebuiltLiveStreamingConfig {
 
 // ignore: must_be_immutable
 class LivePage extends StatelessWidget {
-  LivePage({Key? key, required this.liveID, required this.isHost});
+  LivePage(
+      {super.key,
+      required this.liveID,
+      required this.isHost,
+      required this.userId});
 
   final bool isHost;
   String liveID;
-  String userId = Random().nextInt(10000).toString();
+  String userId;
   @override
   Widget build(BuildContext context) {
     List<IZegoUIKitPlugin>? yourPluginsList = [];

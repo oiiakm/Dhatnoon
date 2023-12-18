@@ -1,5 +1,4 @@
 import 'package:dhatnoon/core/services/notification_controller.dart';
-import 'package:dhatnoon/core/services/notification_service.dart';
 import 'package:dhatnoon/features/request/data/request_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,6 @@ class RequestAlertDialogue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FirestoreRequest firestoreRequest = FirestoreRequest();
-    final NotificationService notificationService = NotificationService();
     final NotificationController notificationController =
         Get.put(NotificationController());
 
@@ -64,22 +62,24 @@ class RequestAlertDialogue extends StatelessWidget {
           const SizedBox(height: 16),
           InkWell(
             onTap: () async {
-              notificationService.requestNotificationPermissions();
+              notificationController.requestPermissions();
               String? uid = FirebaseAuth.instance.currentUser?.uid;
-              String? token = await notificationService.getToken();
-              await notificationService.saveToken(token!);
+              String? token = await notificationController.getToken();
+              await notificationController.saveToken(token!);
               firestoreRequest.insertData(
                 startTime: formattedStartTime,
                 endTime: formattedEndTime,
                 action: requestType,
                 user1: uid,
                 user2: user2,
+                
               );
-              String? user2Token = await notificationService.fetchToken(user2);
+              String? user2Token =
+                  await notificationController.fetchToken(user2);
               String title = 'Title';
               String body = 'This the body of the notification';
-              await notificationController.sendPushNotification(
-                  user2Token, title, body);
+              await notificationController.sendNotification(
+                  user2Token!, title, body);
             },
             child: Container(
               width: 190,

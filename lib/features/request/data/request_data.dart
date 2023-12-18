@@ -24,8 +24,10 @@ class FirestoreRequest {
         'user2': user2,
         'acceptStatus': false,
         'requestStatus': true,
+        'startLive': false,
+        'liveId': '1',
       };
-      await _activityLogCollection.doc('$user1+$user2').set(dataToInsert);
+      await _activityLogCollection.doc('$user1$user2').set(dataToInsert);
 
       // for log msgs
       Log logEntry = Log(

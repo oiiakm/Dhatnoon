@@ -1,6 +1,7 @@
 import 'package:dhatnoon/features/history/domain/history_controllers.dart';
 import 'package:dhatnoon/features/home/data/all_user_data.dart';
-import 'package:dhatnoon/features/zegocloud/live_page.dart';
+import 'package:dhatnoon/features/zegocloud/zegocloud_controller.dart';
+import 'package:dhatnoon/features/zegocloud/front_camera_live_stream.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,11 @@ class UserInformationWidget extends StatelessWidget {
 
   final HistoryController historyController = Get.put(HistoryController());
   final AllUserData _allUserData = AllUserData();
+  final ZegocloudController _zegocloudController =
+      Get.put(ZegocloudController());
+  final FrontCameraLiveStreamController _frontCameraLiveStreamController =
+      Get.put(FrontCameraLiveStreamController());
+  bool user = true;
 
   @override
   Widget build(BuildContext context) {
@@ -101,25 +107,20 @@ class UserInformationWidget extends StatelessWidget {
             '/history',
           );
         } else if (text.startsWith('Fetch')) {
+          Map<String, dynamic> userData =
+              await _zegocloudController.getDocumentData();
 
-      
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) =>
-          //         LivePage(liveID: 'user1user2', isHost: true),
-          //   ),
-          // );
+          if (userData['startLive']) {
+            _zegocloudController.watchLive( userData['liveId'],
+                isHost: true, durationInSeconds: 11, user1: userData['user1']);
+          }
 
+          String? recipientToken =
+              await _frontCameraLiveStreamController.fetchToken(userData['user2']);
 
-
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) =>
-          //         LivePage(liveID: 'user1user2', isHost: false),
-          //   ),
-          // );
+          print(recipientToken);
+          _frontCameraLiveStreamController.sendNotification(
+              recipientToken!, userData['user2'], 11, userData['liveId']);
         }
       },
       child: Container(
